@@ -1,85 +1,74 @@
 package com.example.lab1kot104.BaiTapBuoi3Bai8
 
-fun main(){
+fun main() {
+    var listThe = mutableListOf<TheMuon>()
+
+    val tm1 = TheMuon("Pham Minh Hieu", 20, "MD18309", "PM01", 28, 4, "FLSTDIO")
+    listThe.add(tm1)
     do {
-        println("Bài 8 buổi 3 PH42640")
-        println("1. Hiển thị danh sách sinh vien")
-        println("2. Hiển thị danh sách thẻ mượn")
-        println("3. Thêm sinh viên mới")
-        println("4. Thêm thẻ mượn ")
-        println("5. Xóa thẻ mượn ")
-        println("Bấm bất kỳ để thoát")
-        println("Mời bạn chọn : ")
-        val choose = readLine()?.toIntOrNull() ?: -1
-        when(choose){
-            1 -> SinhVien.getDanhSach()
-            2 -> TheMuon.getDanhSachThe()
-            3 -> addSinhVien()
-            4 -> addTheMuon()
-            5 -> deleteTheMuon()
-            else -> break
+        println("Vui long chon chuc nang:")
+        println("1. Xem danh sach the muon")
+        println("2. Them the muon")
+        println("3. Xoa the muon")
+        var s = readLine()!!.toInt()
+
+        when (s) {
+            1 -> {
+                for ( i in listThe){
+                    println(i.getThongTin())
+                }
+            }
+            2 -> addTheMuon(listThe)
+            3 -> deleteTheMuon(listThe)
         }
 
-        println("Bạn có muốn tiếp tục hay không ( Bấm c để tiếp tục) ?")
-        val s = readLine()
-        if (s != "c") break
-    }while (true)
+        print("Ban co muon tiep tuc khong? (y/n): ")
+        var check = readLine()
+        if (check.equals("n"))
+            break
+    } while (true)
 }
 
-fun addSinhVien(){
-    println("Nhập họ tên sinh viên : ")
-    val hoTen = readLine().toString()
 
-    var tuoi : Int
-    do {
-        println("Nhập tuổi ( lớn hơn 0 ): ")
-        tuoi = readLine()?.toIntOrNull() ?: -1
-    }while (tuoi <= 0)
+fun addTheMuon(listThe: MutableList<TheMuon>) {
+    print("Nhap ho ten sinh vien: ")
+    var hoten = readLine()
+    print("Nhap tuoi: ")
+    var tuoi = readLine()!!.toInt()
+    print("Nhap lop: ")
+    var lop = readLine()
+    print("Nhap ma the muon: ")
+    var matm = readLine()
+    print("Ngay muon: ")
+    var ngaymuon = readLine()!!.toInt()
+    print("Han tra: ")
+    var hantra = readLine()!!.toInt()
+    print("So hieu sach: ")
+    var sohieusach = readLine()
 
-    println("Nhập lớp : ")
-    val lop = readLine().toString()
+    val tm = TheMuon(hoten!!, tuoi, lop!!, matm!!, ngaymuon, hantra, sohieusach!!)
 
-    val sv = SinhVien(hoTen,tuoi,lop)
-    SinhVien.addSV(sv)
+    listThe.add(tm)
+
+    for ( i in listThe){
+        println(i.getThongTin())
+    }
 }
 
-fun addTheMuon(){
-    var ngayMuon : Int
-    var hanTra : Int
-    var sv : SinhVien
-    do {
-        println("Nhập tên sinh viên mượn sách : ")
-        val tenSv = readLine().toString()
-        sv = SinhVien.getSinhVien(tenSv)!!
-        if (sv != null) break
-    }while (true)
-
-
-
-    println("Nhập mã phiếu : ")
-    val maPhieu = readLine().toString()
-
-    do {
-        println("Nhập ngày mượn (số nguyên dương) : ")
-        ngayMuon = readLine()?.toIntOrNull() ?: -1
-        if (ngayMuon > 0) break
-    }while (true)
-
-    do {
-        println("Nhập hạn trả (số nguyên dương) : ")
-        hanTra = readLine()?.toIntOrNull() ?: -1
-        if (hanTra > 0) break
-    }while (true)
-
-    println("Nhập số hiệu sách : ")
-    val soHieuSach = readLine().toString()
-
-    val theMuon = TheMuon(sv,maPhieu,ngayMuon,hanTra,soHieuSach)
-    TheMuon.addTheMuon(theMuon)
-}
-
-fun deleteTheMuon(){
-    println("Nhập mã thẻ muốn xóa : ")
-    var maThe = readLine().toString()
-    TheMuon.deleteTheMuon(maThe)
+fun deleteTheMuon(listThe: MutableList<TheMuon>) {
+    print("Nhap ma the muon can xoa: ")
+    var matm = readLine()
+    var check = false
+    for (tm in listThe) {
+        if (tm.mapm.equals(matm)) {
+            listThe.remove(tm)
+            check = true
+            break
+        }
+    }
+    if (check == false)
+        println("Giao vien khong ton tai")
+    for ( i in listThe){
+        println(i.getThongTin())
+    }
 }

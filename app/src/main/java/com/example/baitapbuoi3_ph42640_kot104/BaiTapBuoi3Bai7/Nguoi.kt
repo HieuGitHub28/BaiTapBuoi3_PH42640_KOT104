@@ -1,18 +1,24 @@
 package com.example.lab1kot104.BaiTapBuoi3Bai7
 
-open class Nguoi(var hoTen: String,
-                 var tuoi: Int,
-                 var queQuan: String,
-                 var msgv: String) {
+open class Nguoi(
+    var hoTen: String,
+    var tuoi: Int,
+    var queQuan: String,
+    var msgv: String
+) {
 
     override fun toString(): String {
-        return "Họ tên : $hoTen, tuổi : $tuoi, quê quán : $queQuan, msgv : $msgv "
+        return "Họ tên : $hoTen," +
+                " tuổi : $tuoi," +
+                " quê quán : $queQuan," +
+                " msgv : $msgv "
     }
 }
 
-class CBGV(hoTen: String, tuoi: Int, queQuan: String, msgv: String,
-           var luongCung: Float, var luongThuong: Float, var tienPhat: Float) : Nguoi(hoTen, tuoi, queQuan, msgv) {
-
+class CBGV(
+    hoTen: String, tuoi: Int, queQuan: String, msgv: String,
+    var luongCung: Float, var luongThuong: Float, var tienPhat: Float
+) : Nguoi(hoTen, tuoi, queQuan, msgv) {
 
     companion object {
         val danhSachCBGV = mutableListOf<CBGV>()
@@ -34,24 +40,27 @@ class CBGV(hoTen: String, tuoi: Int, queQuan: String, msgv: String,
             }
         }
 
-        fun getDanhSachGV(){
-            if (danhSachCBGV.size == 0){
+        fun getDanhSachGV() {
+            if (danhSachCBGV.size == 0) {
                 println("Danh sách rỗng!")
-            }else{
+            } else {
                 println("Danh sách CBGV")
-                for (gv in danhSachCBGV){
+                for (gv in danhSachCBGV) {
                     println(gv)
                 }
             }
         }
     }
+
     fun luongThucLinh(luongCung: Float, luongThuong: Float, tienPhat: Float): Float {
         val tong = luongCung + luongThuong - tienPhat
         return tong
     }
 
     override fun toString(): String {
-        return super.toString() + " --> Có lương cứng = $luongCung đ, lương thửởng = $luongThuong đ , tiền phạt = $tienPhat đ\n" +
-                "--> Tổng thực lĩnh = ${luongThucLinh(luongCung,luongThuong,tienPhat)} đ"
+        return super.toString() + " lương cứng = $luongCung đ," +
+                " lương thưởng = $luongThuong đ ," +
+                " tiền phạt = $tienPhat đ\n" +
+                "Tổng thực lĩnh = ${luongThucLinh(luongCung, luongThuong, tienPhat)} đ"
     }
 }
